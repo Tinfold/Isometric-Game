@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cbe02gglqr1xa"
+path="res://.godot/imported/DoorWay.obj-e2e0d54172035922c8d3df527c7ea5ea.mesh"
+
+[deps]
+
+files=["res://.godot/imported/DoorWay.obj-e2e0d54172035922c8d3df527c7ea5ea.mesh"]
+
+source_file="res://Models/DungeonTileSet/DoorWay.obj"
+dest_files=["res://.godot/imported/DoorWay.obj-e2e0d54172035922c8d3df527c7ea5ea.mesh", "res://.godot/imported/DoorWay.obj-e2e0d54172035922c8d3df527c7ea5ea.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

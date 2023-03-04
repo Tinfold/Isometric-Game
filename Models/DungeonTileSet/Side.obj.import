@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c2k4o4mxeisq1"
+path="res://.godot/imported/Side.obj-c44e05e8589d5793f82f5def4eb09187.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Side.obj-c44e05e8589d5793f82f5def4eb09187.mesh"]
+
+source_file="res://Models/DungeonTileSet/Side.obj"
+dest_files=["res://.godot/imported/Side.obj-c44e05e8589d5793f82f5def4eb09187.mesh", "res://.godot/imported/Side.obj-c44e05e8589d5793f82f5def4eb09187.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

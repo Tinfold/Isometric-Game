@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjo2d44hmdpbs"]
+
+[ext_resource type="Texture2D" uid="uid://bsfgagas0rvni" path="res://Textures/fire_01.png" id="1_w4bxb"]
+[ext_resource type="AudioStream" uid="uid://deyfioq3volgf" path="res://SFX/BloodHit.mp3" id="2_4ccsg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0s1dy"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.392157, 0, 0, 1)
+albedo_texture = ExtResource("1_w4bxb")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow_amount = 14.754
+
+[sub_resource type="QuadMesh" id="QuadMesh_cuc1q"]
+material = SubResource("StandardMaterial3D_0s1dy")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_xr2tm"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.345455, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_oe63c"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="BloodSplatter" type="Node3D"]
+
+[node name="Particles" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("QuadMesh_cuc1q")
+direction = Vector3(0, 0, 1)
+spread = 30.0
+gravity = Vector3(0, -20, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+angle_min = 90.0
+angle_max = 180.0
+angle_curve = SubResource("Curve_xr2tm")
+scale_amount_min = 0.0
+color_ramp = SubResource("Gradient_oe63c")
+hue_variation_max = 1.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_4ccsg")
+autoplay = true

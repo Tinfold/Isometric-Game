@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dg3dunowhb11h"]
+
+[ext_resource type="Texture2D" uid="uid://c5gtthygdshpn" path="res://Textures/trace_01.png" id="1_rvc7p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xo0kk"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_rvc7p")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_oax1q"]
+material = SubResource("StandardMaterial3D_xo0kk")
+size = Vector2(1, 0.3)
+
+[sub_resource type="Curve" id="Curve_7nivn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.983165, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_b5tup"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="TestProjectileImpact" type="Node3D"]
+
+[node name="Particles" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("QuadMesh_oax1q")
+direction = Vector3(0, 0, 0)
+spread = 30.0
+initial_velocity_min = 10.0
+initial_velocity_max = 12.82
+angular_velocity_min = 36.92
+angular_velocity_max = 36.92
+damping_max = 21.15
+angle_min = 90.0
+angle_max = 90.0
+scale_amount_curve = SubResource("Curve_7nivn")
+color_ramp = SubResource("Gradient_b5tup")

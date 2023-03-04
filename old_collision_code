@@ -1,0 +1,42 @@
+public async void OnCollide(Node3D node)
+    {
+        /*
+        // Make sure the player isn't shooting himself
+        if (node != SourceEntity && HasCollided == false)
+        {
+            HasCollided = true;
+            // This code prevents the particles from being destroyed until proper time
+            GetNode<MeshInstance3D>("Geometry").Visible = false;
+            GetNode<CPUParticles3D>("ParticleHolder/Particles").Emitting = false;
+            GetNode<Node3D>("MiscFX").Visible = false;
+
+            Vector3 TrueCollisionPoint = Position + LocalCollisionPosition;
+           
+           
+            Node3D Impact = (Node3D)(ImpactParticles.Instantiate());
+  
+          
+            GetParent().AddChild(Impact);
+            Impact.Position = TrueCollisionPoint;
+            Impact.LookAt(TrueCollisionPoint-LocalCollisionNormal);
+            Impact.GetNode<CPUParticles3D>("Particles").Emitting=true;
+            
+            //Impact.Basis=new Basis(Vector3.Zero,Vector3.Zero,LocalCollisionNormal);
+
+           // GD.Print(LocalCollisionNormal);
+     
+            //Impact.RotateY(1);
+            //Impact.GetNode<CPUParticles3D>("Particles").Emitting=true;
+            //GD.Print("asd");
+        
+            
+
+
+            Freeze = true;
+            SceneTreeTimer timer = GetTree().CreateTimer(1.0);
+            await ToSignal(timer, "timeout");
+            //Impact.QueueFree();
+            QueueFree();
+        }
+        */
+    }

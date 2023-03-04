@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cmevslcca7ixt"
+path="res://.godot/imported/SideSlant2.obj-25584c21622c1df43218e1b672fe4d82.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SideSlant2.obj-25584c21622c1df43218e1b672fe4d82.mesh"]
+
+source_file="res://Models/DungeonTileSet/SideSlant2.obj"
+dest_files=["res://.godot/imported/SideSlant2.obj-25584c21622c1df43218e1b672fe4d82.mesh", "res://.godot/imported/SideSlant2.obj-25584c21622c1df43218e1b672fe4d82.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

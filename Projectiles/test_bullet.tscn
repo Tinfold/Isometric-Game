@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Weapon/Projectile.cs" id="1_vgcka"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5cs6k"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_yog62"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afm2j"]
+shading_mode = 2
+albedo_color = Color(1, 0, 1, 1)
+emission_enabled = true
+emission = Color(1, 0.815686, 0.490196, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kefps"]
+transparency = 1
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_y1iua"]
+material = SubResource("StandardMaterial3D_kefps")
+radius = 0.05
+height = 0.1
+radial_segments = 32
+rings = 16
+
+[sub_resource type="Curve" id="Curve_kyha4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="TestBullet" type="Area3D"]
+collision_layer = 2
+script = ExtResource("1_vgcka")
+BulletSpeed = 150
+TimeBeforeDespawn = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+shape = SubResource("BoxShape3D_5cs6k")
+
+[node name="Geometry" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.067, 0, 0, 0, 0.067, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("SphereMesh_yog62")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_afm2j")
+
+[node name="MiscFX" type="Node3D" parent="."]
+
+[node name="Light" type="OmniLight3D" parent="MiscFX"]
+
+[node name="ParticleHolder" type="Node3D" parent="."]
+
+[node name="Particles" type="CPUParticles3D" parent="ParticleHolder"]
+transform = Transform3D(1.00444, 0, 0, 0, 1.00444, 0, 0, 0, 1.00444, 0, 0, 0)
+visible = false
+amount = 238
+mesh = SubResource("SphereMesh_y1iua")
+emission_shape = 2
+emission_sphere_radius = 0.02
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.16
+initial_velocity_max = 0.16
+angle_min = -9.2
+angle_max = 73.8
+scale_amount_curve = SubResource("Curve_kyha4")

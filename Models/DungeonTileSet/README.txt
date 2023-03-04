@@ -1,0 +1,1 @@
+You are free to use and modify these assets for both commercial and non-commercial applications.
