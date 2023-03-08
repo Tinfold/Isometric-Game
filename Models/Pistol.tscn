@@ -270,7 +270,7 @@ mesh = SubResource("ArrayMesh_8ucru")
 skin = SubResource("Skin_lk0h0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 4.0
+speed_scale = 7.0
 libraries = {
 "": SubResource("AnimationLibrary_sv4bx")
 }

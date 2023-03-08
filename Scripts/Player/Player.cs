@@ -26,22 +26,15 @@ public partial class Player : CharacterBody3D
 
     public override void _Ready()
     {
+        GetNode<Marker3D>("Character/Armature/Skeleton3D/LeftHandMarker/Target").Position = GetNode<Marker3D>("Character/Armature/Skeleton3D/LeftHandMarker/Target").Position + new Vector3(10,0,0);
         camera = CameraPivot.GetNode<Camera3D>("Camera");
         testBullet = ResourceLoader.Load<PackedScene>("Projectiles/test_bullet.tscn");
         testShootParticle = ResourceLoader.Load<PackedScene>("VFX/TestShootParticle.tscn");
-
         GetNode<AnimationTree>("Character/AnimationPlayer/AnimationTree").Active = true;
-        //GetNode<AnimationPlayer>("Character/AnimationPlayer").play
-        //GetNode<AnimationPlayer>("Character/AnimationPlayer").Play("Walk");
         StateMachine = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("Character/AnimationPlayer/AnimationTree").Get("parameters/playback");
         StateMachine.Travel("Idle");
-        GetNode<Marker3D>("Character/Armature/Skeleton3D/LeftHandMarker/Target").GlobalPosition = GetNode<Node3D>("ItemPoint").GlobalPosition;
-        GetNode<Marker3D>("Character/Armature/Skeleton3D/RightHandMarker/Target").GlobalPosition = GetNode<Node3D>("ItemPoint").GlobalPosition;
         GetNode<SkeletonIK3D>("Character/Armature/Skeleton3D/LeftArmIK").Start();
         GetNode<SkeletonIK3D>("Character/Armature/Skeleton3D/RightArmIK").Start();
-        // GetNode<SkeletonIK3D>("Character/Human Armature/Skeleton3D/LowerLeftArmIK").Start();
-        //GetNode<AnimationTree>("Character/AnimationPlayer/AnimationTree").state
-        //GetNode<AnimationTree>("Character/AnimationPlayer/AnimationTree").Active=true;
     }
 
     // There are probably two ways to handle strafing
@@ -89,6 +82,10 @@ public partial class Player : CharacterBody3D
     // The player must look towards the mouse at all times.
     public override void _PhysicsProcess(double delta)
     {
+        GetNode<Marker3D>("Character/Armature/Skeleton3D/LeftHandMarker/Target").GlobalPosition = GetNode<Marker3D>("ItemPoint/LeftHandPoint").GlobalPosition;
+        GetNode<Marker3D>("Character/Armature/Skeleton3D/RightHandMarker/Target").GlobalPosition = GetNode<Marker3D>("ItemPoint/RightHandPoint").GlobalPosition;
+
+        //GetNode<Marker3D>("Character/Armature/Skeleton3D/RightHandMarker/Target").GlobalPosition = GetNode<Node3D>("ItemPoint").GlobalPosition;
         Vector3 velocity = Velocity;
 
         // Add the gravity.
@@ -171,6 +168,8 @@ public partial class Player : CharacterBody3D
 
     private async void ShootFX()
     {
+        // What happens if we try to tween the itemPoint?
+        GetNode<AnimationPlayer>("ItemPoint/AnimationPlayer").Play("Pistol_Recoil");
         GetNode<AnimationPlayer>("ItemPoint/Pistol/AnimationPlayer").Play("Fire");
         Node3D point = GetNode<Node3D>("ProjectilePoint");
         Node3D p = (Node3D)testShootParticle.Instantiate();
