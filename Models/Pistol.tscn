@@ -274,3 +274,6 @@ speed_scale = 7.0
 libraries = {
 "": SubResource("AnimationLibrary_sv4bx")
 }
+
+[node name="ShellEjectionPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72189, 2.24942, 0.987334)

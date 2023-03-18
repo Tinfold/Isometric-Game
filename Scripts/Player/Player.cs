@@ -19,22 +19,41 @@ public partial class Player : CharacterBody3D
     private Camera3D camera;
 
     PackedScene testBullet;
+    PackedScene testBulletShell;
     PackedScene testShootParticle;
 
     AnimationNodeStateMachinePlayback StateMachine;
 
+    private RigidBody3D[] ShellPool;
+    private int ShellIndex = 0;
+    private int ShellCache = 20;
+
+    private Node3D EquippedItem;
+
+    Random rand;
 
     public override void _Ready()
     {
+        EquippedItem=GetNode<Node3D>("ItemPoint/Pistol");
+        rand = new Random();
         GetNode<Marker3D>("Character/Armature/Skeleton3D/LeftHandMarker/Target").Position = GetNode<Marker3D>("Character/Armature/Skeleton3D/LeftHandMarker/Target").Position + new Vector3(10,0,0);
         camera = CameraPivot.GetNode<Camera3D>("Camera");
         testBullet = ResourceLoader.Load<PackedScene>("Projectiles/test_bullet.tscn");
+        testBulletShell = ResourceLoader.Load<PackedScene>("Models/Bullet Shells/pistol_shell.tscn");
         testShootParticle = ResourceLoader.Load<PackedScene>("VFX/TestShootParticle.tscn");
         GetNode<AnimationTree>("Character/AnimationPlayer/AnimationTree").Active = true;
         StateMachine = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("Character/AnimationPlayer/AnimationTree").Get("parameters/playback");
         StateMachine.Travel("Idle");
         GetNode<SkeletonIK3D>("Character/Armature/Skeleton3D/LeftArmIK").Start();
         GetNode<SkeletonIK3D>("Character/Armature/Skeleton3D/RightArmIK").Start();
+
+        // Shell pool
+        ShellPool = new RigidBody3D[ShellCache];
+        for (int i=0;i<ShellCache;i++) {
+            ShellPool[i] = (RigidBody3D) testBulletShell.Instantiate();
+        }
+
+
     }
 
     // There are probably two ways to handle strafing
@@ -186,10 +205,25 @@ public partial class Player : CharacterBody3D
         p.QueueFree();
     }
 
+    private RigidBody3D GetShellFromPool(){
+        RigidBody3D shell=ShellPool[ShellIndex];
+        if (shell.IsInsideTree()){
+            shell.GetParent().RemoveChild(shell);
+        }
+        shell.Freeze=true;
+        shell.Freeze=false;
+        ShellIndex++;
+        ShellIndex=ShellIndex % ShellCache;
+        return shell;
+    }
+
     private void CreateTestProjectile()
     {
         Node3D point = GetNode<Node3D>("ProjectilePoint");
         Area3D newBullet = (Area3D)testBullet.Instantiate();
+        RigidBody3D shell=GetShellFromPool();//(RigidBody3D)testBulletShell.Instantiate();
+
+
 
         //newBullet.Freeze = false;
         // Only needs to be the forward of the bullet point
@@ -197,7 +231,13 @@ public partial class Player : CharacterBody3D
         newBullet.Set("SourceEntity", this);
         newBullet.Basis = new Basis(newBullet.Basis.X, newBullet.Basis.Y, point.GlobalTransform.Basis.Z.Normalized());
         GetParent().AddChild(newBullet);
-
+        GetParent().AddChild(shell);
+        shell.GlobalPosition=EquippedItem.GetNode<Marker3D>("ShellEjectionPoint").GlobalPosition;// + new Vector3(0,5,0);
+        shell.Rotation=point.GlobalRotation + new Vector3(3.14f/2f,0,0);
+        shell.ApplyImpulse(
+            (point.GlobalTransform.Basis.X.Normalized()/(rand.Next(3,6))) + new Vector3(0,(float)rand.Next(3)/5f,0)
+            , new Vector3(0.1f,0.1f,0.1f));
+        shell.ApplyTorqueImpulse(new Vector3(5,5,5));
         // idk im so fucking bad
         //newBullet.ApplyImpulse(-point.GlobalTransform.basis.z.Normalized() * 150);
         //Callable test=new Callable(this,nameof(onCollide));

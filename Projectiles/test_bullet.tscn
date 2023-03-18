@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=8 format=3 uid="uid://cwtk0ie5su56c"]
 
 [ext_resource type="Script" path="res://Scripts/Weapon/Projectile.cs" id="1_vgcka"]
 

@@ -1,0 +1,17 @@
+Need to:
+	Reloading animations?
+	Better blood splatters and surface impacts
+	Better smoke particles
+	Better bullet vfx
+	Ragdolls / Death animations
+	Hit animations
+
+
+What I want to focus on right now, in order:
+	1. Why is the first shot not producing a bullet?
+	2. Better blood splatters and surface impacts
+	3. Ragdolls / Death animations
+	4. Hit animations
+	5. Reloading animations?
+	6. Better bullet vfx
+	7. Better smoke particles

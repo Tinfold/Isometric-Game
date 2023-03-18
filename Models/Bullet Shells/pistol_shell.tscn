@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cikkcbdlthpvt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1ogj8"]
+friction = 0.07
+bounce = 0.61
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o40bk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0sohq"]
+albedo_color = Color(0.839216, 0.788235, 0, 1)
+metallic = 0.38
+metallic_specular = 1.0
+roughness = 0.41
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bchmt"]
+margin = 0.01
+radius = 0.6
+
+[node name="Shell" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+collision_layer = 32768
+mass = 0.1
+inertia = Vector3(1, 1, 1)
+physics_material_override = SubResource("PhysicsMaterial_1ogj8")
+continuous_cd = true
+can_sleep = false
+freeze_mode = 1
+angular_damp = 1.0
+
+[node name="Shell" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0, 0)
+mesh = SubResource("CylinderMesh_o40bk")
+material = SubResource("StandardMaterial3D_0sohq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0, 0)
+shape = SubResource("CylinderShape3D_bchmt")
